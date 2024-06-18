@@ -34,8 +34,10 @@ graph TD;
     Início --> Gerar_número;
     Gerar_número --> Palpite;
     Palpite --> Verificação;
-    Verificação --> Palpite;
-    Verificação --> Parabéns;
+    Verificação --> Ok;
+    Verificação --> Err;
+    Err --> Palpite;
+    Ok --> Parabéns;
     Parabéns --> Fim;
 ```
 
