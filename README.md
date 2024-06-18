@@ -31,8 +31,8 @@ O estudo da linguagem está se dando (em grande parte) com base na documentaçã
 * Diagrama de funcionamento:
 ```mermaid
 graph TD;
-    Início --> Gerar número;
-    Gerar número --> Palpite;
+    Início --> Gerar_número;
+    Gerar_número --> Palpite;
     Palpite --> Verificação;
     Verificação --> Palpite;
     Verificação --> Parabéns;
