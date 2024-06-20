@@ -2,6 +2,8 @@
 
 Repositório dedicado ao estudo da linguagem Rust, assim como o anterior [Estudo-de-Rust](https://github.com/MauricioPaivadaSilva/Estudo-de-Rust).
 
+**Este repositório está sendo construido conforme EU estudo, sendo assim o mesmo NÃO segue uma sequência didática/pedagógica ou a própria sequência da documentação. Logo não espere um mini curso ou sequencia "correta" de estudos, pois este repositório só existe para meu próprio estudo e consulta. Está público, pois quero acessá-lo sem necessitar o login, caso seja necessário utilizar alguma informação presente aqui.**
+
 ---
 
 ## Base de estudo
@@ -14,7 +16,8 @@ O estudo da linguagem está se dando (em grande parte) com base na documentaçã
 
 * [Notas](#notas)
     * [Dia 1](#dia-1)
-        * [Resumo](#resumo-dia-1)
+    * [Dia 2](#dia-2)
+        * [Como funciona o Cargo](#como-funciona-o-cargo)
 
 ---
 
@@ -143,3 +146,68 @@ O `break` faz com que o programa saia do loop, e como o loop é a última parte 
 Para refinar mais ainda o código, é possível adicionar `match` no momento da conversão de `String` para `u32`, de forma a evitar erros. Trocando desta forma o `except()` pelo `match`.
 
 *O [código](https://github.com/MauricioPaivadaSilva/Estudo-de-Rust-2/advinha) está no diretório advinha dentro deste repositório.*
+
+#### Dia 2
+
+Neste dia 2 eu acabei voltando para o item 1.3 da documentação, para entender um pouco de como funciona o cargo, já que ele é útil para todos os projetos Rust. O cargo não é necessário, mas é útil e recomendável útilizar.
+
+##### Como funciona o Cargo
+
+O Cargo é um facilitador para criação de projetos Rust, permitindo o gerenciamento de pacotes no projeto, compilação para desenvolvimento, compilação para distribuição, ... O Cargo utiliza o Cargo.toml para gerenciar o projeto.
+
+* Cargo.toml
+
+    Em seu cabeçalho o Cargo.toml trás algumas informações sobre o projeto necessárias para a compilação, a tag que abre este pedaço do código é `[package]` e o seu conteúdo é por exemplo:
+    * Nome;
+    * Versão;
+    * Edição (ano que o projeto está iniciando).
+
+    Após esta parte inicial, o arquivo trás informações das dependencias do arquivo, que tem como tag `[dependencies]` e trás informações como:
+    * Nome da dependencia;
+    * Versão da dependencia;
+    * Em alguns casos também trás as features.
+
+Ao compilar o código na primeira vez utilizando o Cargo, o mesmo irá gerar um arquivo chamado Cargo.lock. Este arquivo é responsável por manter o controle das verões exatas de todas as dependências utilizadas no projeto, a partir do momento que ele compila o projeto contendo aquela dependência pela primeira vez, o mesmo armazena dados sobre ela.
+
+* Exemplo:
+
+<div align="center">
+
+| Ação | Resultado |
+| --- | --- |
+| Criei o projeto | Cargo.lock ainda não é criado |
+| Adicionei a dependencia sfml | Cargo.lock criado e adicionada informações acerca das dependencias necessárias, como: Nome da dependencia; Verão; "Onde encontrar" (sorce); checksum. |
+
+</div>
+
+O Cargo tentará manter essas dependencia neste estado para garantir o funcionamento do códigom, assim evitando a quebra de compatibilidade.
+
+###### Comandos do cargo
+
+<div align="center">
+
+| Comando | Ação |
+| --- | --- |
+| `cargo new` | Cria um novo projeto Rust. |
+| `cargo add` | Adiciona a dependencia requerida |
+| `cargo run` | Compila e roda o programa em modo de desenvolvimento |
+| `cargo build` | Apenas compila o programa em modo de desenvolvimento |
+| `cargo check` | Não compila o programa, mas faz as verificações do código e o compilador apresenta as saídas de erro. |
+
+</div>
+
+**Por padrão o cargo cria junto com o projeto um repositório git local, sendo o git o sistema de controle de verção utilizado por padrão dos projetos Rust.**
+
+###### Adicionais aos comandos do cargo
+
+`cargo [COMANDO] [ADICIONAIS]`
+
+<div align="center">
+
+| Comando | Ação |
+| --- | --- |
+| `--release` | Ao ser utilizado junto do comando build, o cargo passa a compilar em formato de distribuição, sem o modo debug e com otimizações |
+| `--help` | Ao ser utilizado com qualquer comando, permite ver uma ajuda acerca do comando |
+| `--vcs=` | Ao ser utilizado com o comando de criação de projeto, permite escolher um sistema de controle de verção diferente do git. |
+
+</div>
