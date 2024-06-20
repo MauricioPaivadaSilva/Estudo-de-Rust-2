@@ -147,6 +147,8 @@ Para refinar mais ainda o código, é possível adicionar `match` no momento da 
 
 *O [código](https://github.com/MauricioPaivadaSilva/Estudo-de-Rust-2/advinha) está no diretório advinha dentro deste repositório.*
 
+[=====]
+
 #### Dia 2
 
 Neste dia 2 eu acabei voltando para o item 1.3 da documentação, para entender um pouco de como funciona o cargo, já que ele é útil para todos os projetos Rust. O cargo não é necessário, mas é útil e recomendável útilizar.
@@ -201,3 +203,4 @@ O Cargo tentará manter essas dependencia neste estado para garantir o funcionam
 | `--help` | Ao ser utilizado com qualquer comando, permite ver uma ajuda acerca do comando |
 | `--vcs=` | Ao ser utilizado com o comando de criação de projeto, permite escolher um sistema de controle de verção diferente do git. |
 
+[=====]
