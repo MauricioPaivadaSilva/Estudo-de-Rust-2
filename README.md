@@ -171,20 +171,14 @@ Ao compilar o código na primeira vez utilizando o Cargo, o mesmo irá gerar um 
 
 * Exemplo:
 
-<div align="center">
-
 | Ação | Resultado |
 | --- | --- |
 | Criei o projeto | Cargo.lock ainda não é criado |
 | Adicionei a dependencia sfml | Cargo.lock criado e adicionada informações acerca das dependencias necessárias, como: Nome da dependencia; Verão; "Onde encontrar" (sorce); checksum. |
 
-</div>
-
 O Cargo tentará manter essas dependencia neste estado para garantir o funcionamento do códigom, assim evitando a quebra de compatibilidade.
 
 ###### Comandos do cargo
-
-<div align="center">
 
 | Comando | Ação |
 | --- | --- |
@@ -194,7 +188,6 @@ O Cargo tentará manter essas dependencia neste estado para garantir o funcionam
 | `cargo build` | Apenas compila o programa em modo de desenvolvimento |
 | `cargo check` | Não compila o programa, mas faz as verificações do código e o compilador apresenta as saídas de erro. |
 
-</div>
 
 **Por padrão o cargo cria junto com o projeto um repositório git local, sendo o git o sistema de controle de verção utilizado por padrão dos projetos Rust.**
 
@@ -202,12 +195,9 @@ O Cargo tentará manter essas dependencia neste estado para garantir o funcionam
 
 `cargo [COMANDO] [ADICIONAIS]`
 
-<div align="center">
-
 | Comando | Ação |
 | --- | --- |
 | `--release` | Ao ser utilizado junto do comando build, o cargo passa a compilar em formato de distribuição, sem o modo debug e com otimizações |
 | `--help` | Ao ser utilizado com qualquer comando, permite ver uma ajuda acerca do comando |
 | `--vcs=` | Ao ser utilizado com o comando de criação de projeto, permite escolher um sistema de controle de verção diferente do git. |
 
-</div>
