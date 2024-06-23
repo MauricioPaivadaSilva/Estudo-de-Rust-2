@@ -18,6 +18,10 @@ O estudo da linguagem está se dando (em grande parte) com base na documentaçã
     * [Dia 1](#dia-1)
     * [Dia 2](#dia-2)
         * [Como funciona o Cargo](#como-funciona-o-cargo)
+    * [Dia 3](#dia-3)
+        * [Variáveis](#variaveis)
+        * [Constantes](#constantes)
+        * [Tipos de dados](#tipos-de-dados)
 
 ---
 
@@ -178,7 +182,7 @@ Ao compilar o código na primeira vez utilizando o Cargo, o mesmo irá gerar um 
 | Criei o projeto | Cargo.lock ainda não é criado |
 | Adicionei a dependencia sfml | Cargo.lock criado e adicionada informações acerca das dependencias necessárias, como: Nome da dependencia; Verão; "Onde encontrar" (sorce); checksum. |
 
-O Cargo tentará manter essas dependencia neste estado para garantir o funcionamento do códigom, assim evitando a quebra de compatibilidade.
+O Cargo tentará manter essas dependencia neste estado para garantir o funcionamento do código, assim evitando a quebra de compatibilidade.
 
 ###### Comandos do cargo
 
@@ -204,3 +208,155 @@ O Cargo tentará manter essas dependencia neste estado para garantir o funcionam
 | `--vcs=` | Ao ser utilizado com o comando de criação de projeto, permite escolher um sistema de controle de verção diferente do git. |
 
 ---
+
+#### Dia 3
+
+Neste dia 2 será trabalhadas as variáveis e mutabilidade.
+
+##### Variáveis
+
+Por padrão, todas as variáveis criadas em Rust são imutáveis, isso é proposital na linguagem para proporcionar segurança ao código.
+
+_O compilador do Rust irá ajudar na **maioria** das vezes a corrigir  qualquer erro que exista no código, mas ele **não** faz mágica. É de responsabilidade de quem programa estudar o erro!_
+
+##### Constantes
+
+Constantes são a grosso modo como uma variável imutável, mas ainda assim há algumas diferenças entre os dois. Primeiramente, as contantes não admitem o atributo `mut` das variáveis, pois as constantes são eternamente imutáveis, sendo proibída toda e qualquer mudança após sua declaração.
+
+Para declarar uma constante é utilizado `const` ao invés de `let`, assim como ao usar o `const` você DEVE declarar o tipo da constante.
+
+Ao declarar uma constante, ela irá gerar o binário do valor junto com a compilação, sendo assim as constantes não são computadas em tempo de execução. Exemplo:
+
+```Rust
+const TRES_HORAS_EM_SEGUNDOS: u32 = 3 * 60 * 60;
+```
+
+No exemplo acima há uma conta, essa conta será realizada no momento da compilação e seu resultado será atribuído a variável, tornando-á um valor estático no momento da execução. É de bom tom utilizar todas as letras em maiúsculas quando se declara uma constante em qualquer linguagem, e em Rust isso não é diferente. Em Rust o próprio compilador indica isso.
+
+_Note que o tempo de vida de uma constante em um código é o tempo de vida do escopo em que está inserida. Exemplo:_
+
+```Rust
+fn main() {
+    println!("O valor da constante PI é: {}", pi());
+}
+
+fn pi() -> f32 {
+    const PI: f32 = 3.141593;
+    PI
+}
+```
+
+Ao concluir a função `pi()` a constante saí de escopo, desta forma seu tempo de vida se encerra alí.
+
+##### Tipos de dados
+
+Rust é uma linguagem que exige conhecer o tipo de cada variável em tempo de compilação, o compilador pode inferir alguns tipos, mas é de obrigação do desenvolvedor declarar cada tipo de variável.
+
+Exemplo de momento em que o compilador não consegue inferir o tipo de variável:
+
+```Rust
+let num: u32 = "42".parse().expect("Não é um número!");
+```
+
+Neste caso, como há uma mudança de `String` para `u32` o compilador não conseguiria inferir qual o tipo final, devendo ser inserido o tipo pelo desenvolvedor.
+
+O Rust tem quatro tipos de dados por padrão: inteiros, números com ponto flutuante, booleanos e characters.
+
+###### Tipos de inteiros
+
+|   Comprimento |   Com sinal   |   Sem sinal   |
+|   --- |   --- |   --- |
+|   8 bits  |   `i8`    |   `u8`    |
+|   16 bits |   `i16`   |   `u16`   |
+|   32 bits |   `i32`   |   `u32`   |
+|   64 bits |   `i64`   |   `u64`   |
+|   128 bits    |   `i128`  |   `u128`  |
+|   arch    |   `isize` |   `usize` |
+
+Os números que podem ser armazenados nas variáveis inteiras com sinal são representados pela operação abaixo, em que `n` é o número de bits.
+
+$-(2^{n-1})$ a $2^{n-1}-1$
+
+
+Os números que podem ser armazenados nas variáveis inteiras sem sinal são representados pela operação abaixo, em que `n` é o número de bits.
+
+$0$ a $2^{n}-1$
+
+Para ficar legível é possível escrever números grandes com separação feita utilizando o `_`, como `1_000_000`. Isso é possível para números literais como:
+
+|   Números literais    |   Exemplo |
+|   --- |   --- |
+|   Decimal |   `98_222`    |
+|   Hex |   `0xff`  |
+|   Octal   |   `0o77`  |
+|   Binário |   `0b1111_0000`   |
+|   Byte (Apenas `u8`)  |   `b'A'`  |
+
+###### Tipos de ponto flutuante
+
+Em Rust há apenas dois tipos de valores flutuantes possíveis, o `f32` e o `f64`, por padrão o Rust usará o `f64` devido a arquitetura moderna dos processadores.
+
+###### Operações numéricas
+
+O Rust suporta as quatro operações básicas: adição, subtração, multiplicação e divisão, mas também suporta o resto da divisão.
+
+###### Tipo booleano
+
+O tipo booleano é tratado em rust como `true` e `false`, recebendo a notação `bool`.
+
+###### Tipo characters
+
+O tipo alfabético `char` é utilizado quando trabalhamos com caracteres de 4 bytes de tamanho, representando um Unicode Scalar Value, podendo representar muito mais do que apenas o ASCII e é utilizado `''` para identificar.
+
+###### Tipos compostos
+
+Os tipos compostos representam mais de um tipo primitivo, como em tuplas e matrizes.
+
+###### Tipo de tupla
+
+Uma tupla é uma forma de agrupar uma série de valores de diferentes tipos, em um único tipo composto. Exemplo:
+
+```Rust
+let tupla: (u8, i8, char) = (9, -4, 'R');
+```
+
+A desestruturação de uma tupla pode ser feita de duas formas. Exemplo:
+
+```Rust
+fn main() {
+    let tupla: (u32, i32, char) = (42, -15, 'R');
+
+    // Primeira forma
+    let (a, b, c) = tupla;
+
+    // Segunda forma
+    let a_resposta: u32 = tupla.0;
+}
+```
+
+###### Tipo matriz
+
+Outra forma de agrupar valores é utilizando um _array_, mas na matriz é necessário manter o mesmo tipo de dado em todos os valores presentes nela. Além disso, as matrizes tem tamanhos fixos (observação, aqui quando digo matriz pode ser interpretado como _array_ em outras linguagens).
+
+```Rust
+let matriz = [1, 2, 3, 4, 5];
+```
+
+```Rust
+let matriz: [i32, 4] = [0, 1, 2, 3];
+```
+
+```Rust
+let matriz = [2; 3];
+```
+
+O resultado é `let matriz = [2, 2, 2];`
+
+Para acessar os elementos da matriz, pode-se utilizar `[]`, exemplo:
+
+```Rust
+let m = [1, 2, 3]
+
+let um = m[0];
+let tres = m[2];
+```
