@@ -22,6 +22,10 @@ O estudo da linguagem está se dando (em grande parte) com base na documentaçã
         * [Variáveis](#variaveis)
         * [Constantes](#constantes)
         * [Tipos de dados](#tipos-de-dados)
+    * [Dia 4](#dia-4)
+        * [Funções](#funções)
+        * [Comentários](#comentários)
+        * [Fluxo de controle](#fluxo-de-controle)
 
 ---
 
@@ -360,3 +364,90 @@ let m = [1, 2, 3]
 let um = m[0];
 let tres = m[2];
 ```
+
+---
+
+#### Dia 4
+
+Continuação dos estudos do dia 3.
+
+##### Funções
+
+Em Rust as funções segue o Snake Case, desta forma, em Rust a maior parte das declarações (funções, variáveis,...) serão feitas com palavras inteiramente minusculas(_as constantes não seguem essa regra_).
+
+##### Comentários
+
+Em Rust é recomendável a execulção de comentários de linha única `//`. Mas caso queira, o `/**/` funciona como bloco de comentário, assim como em outras linguagens.
+
+##### Fluxo de controle
+
+Fluxo de controle é quando utilizamos condicionais para determinadas ações do código ou para gerar loop.
+
+###### `if`
+
+```Rust
+fn main() {
+    let number = 3;
+
+    if number < 5 {
+        println!("A condição é verdadeira.");
+    } else {
+        println!("A condição é falsa.");
+    }
+}
+```
+
+###### Repetição com `loop`
+
+```Rust
+fn main() {
+    loop {
+        println!("Novamente");
+    }
+}
+```
+
+Se colocar um `break` o Rust irá parar o `loop`.
+
+```Rust
+fn main() {
+    let mut count = 0;
+    'counting_up: loop {
+        println!("Contador = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    println!("Fim da contagem = {count}");
+}
+```
+
+Com a adição de um rótulo ao loop como por exemplo `'counting_up:` é possível para apenas o loop desejado.
+
+###### While
+
+O `while` é um tipo de loop com condições de existência, isso significa que enquanto a condição for verdadeira o loop será relizado, já após a condição se tornar falsa o loop é encerrado sem a necessidade de executar um `break`. Isso ocorre de forma semelhante em outras linguagens.
+
+###### For
+
+```Rust
+fn main() {
+    for num in (1..4).rev() {
+        println!("{num}!");
+    }
+    println!("Fim");
+}
+```
+
+O `for` é outra forma de criar um loop condicionado, mas desta forma é muito utilizado para percorrer listas ou encontrar um dado específico em uma massa de informações. Também é muito utilizado gerar loops quando você sabe exatamente quando quer parar.
